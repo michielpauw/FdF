@@ -22,6 +22,7 @@ SRCS = fdf.c \
 OBJ = $(SRCS:%.c=%.o)
 LFTDIR = libft/
 LMLXDIR = minilibx_macos/ 
+#LMLXDIR = mlx_macbook/ 
 LIBFT = libft.a
 LIBMLX = libmlx.a
 FT = ft
@@ -37,7 +38,7 @@ $(NAME): $(OBJ) $(LFTDIR)$(LIBFT) $(LMLXDIR)$(LIBMLX)
 	-@echo "FdF Ready"
 
 %.o: %.c $(INCLUDES)
-	-@gcc $(FLAGS) -I$(LFTDIR) -c $(SRCS)
+	-@gcc $(FLAGS) -I$(LFTDIR) -I$(LMLXDIR) -c $(SRCS)
 
 $(LFTDIR)$(LIBFT):
 	$(MAKE) -C $(LFTDIR) $(LIBFT)

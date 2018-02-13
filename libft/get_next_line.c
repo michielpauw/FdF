@@ -37,6 +37,7 @@ static t_fd_list	*get_buff(int fd, int *new_buff)
 		list = current;
 	current->fd = fd;
 	current->next = NULL;
+	current->rsf = 0;
 	*new_buff = 1;
 	return (current);
 }
