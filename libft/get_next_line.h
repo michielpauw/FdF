@@ -6,14 +6,14 @@
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 08:40:27 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/11 10:54:43 by mpauw            ###   ########.fr       */
+/*   Updated: 2017/11/27 16:44:11 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFF_SIZE 84
+# define BUFF_SIZE 32 
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <unistd.h>
@@ -22,14 +22,10 @@
 
 int					get_next_line(const int fd, char **line);
 
-typedef struct		s_fd_list
+typedef struct		s_buff
 {
-	int					fd;
-	int					read_r;
-	int					eof;
-	int					rsf;
-	char				*buff;
-	struct s_fd_list	*next;
-}					t_fd_list;
+	int				fd;
+	char			*buff;
+}					t_buff;
 
 #endif

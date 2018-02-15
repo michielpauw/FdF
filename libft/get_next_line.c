@@ -6,127 +6,99 @@
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 13:39:05 by mpauw             #+#    #+#             */
-/*   Updated: 2017/12/04 08:30:46 by mpauw            ###   ########.fr       */
+/*   Updated: 2017/11/27 16:38:07 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_fd_list	*get_buff(int fd, int *new_buff)
+static t_buff	*get_buff(int fd)
 {
-	static t_fd_list	*list = NULL;
-	t_fd_list			*current;
-	t_fd_list			*prev;
+	static t_list	*list = NULL;
+	t_buff			*buff;
+	t_list			*tmp;
 
-	*new_buff = 0;
-	current = list;
-	prev = NULL;
-	while (current)
+	tmp = list;
+	while (tmp && tmp->content)
 	{
-		if (current->fd == fd)
-			return (current);
-		prev = current;
-		current = current->next;
+		buff = *(t_buff **)tmp->content;
+		if (buff->fd == fd)
+			return (buff);
+		tmp = tmp->next;
 	}
-	if (!(current = (t_fd_list *)malloc(sizeof(t_fd_list)))
-			|| !(current->buff = (char*)malloc(sizeof(char) * BUFF_SIZE)))
+	if (!(buff = (t_buff *)malloc(sizeof(t_buff))))
 		return (NULL);
-	if (prev)
-		prev->next = current;
-	else
-		list = current;
-	current->fd = fd;
-	current->next = NULL;
-	*new_buff = 1;
-	return (current);
+	buff->fd = fd;
+	if (!(list) && !(list = ft_lstnew(NULL, 0)))
+		return (NULL);
+	if (!(buff->buff = (char *)ft_memalloc(sizeof(char) * BUFF_SIZE)))
+		return (NULL);
+	ft_lstaddnewr(&list, &buff, sizeof(buff));
+	return (buff);
 }
 
-static void			reallocate_mem(char **str, int *prev_mem)
+static int		write_to_line(t_buff *buff, char **line, size_t *to_alloc, size_t *read_so_far)
 {
-	char	*temp;
-	int		i;
-
-	i = 0;
-	temp = *str;
-	if (!(*str = (char *)malloc(sizeof(char) * (*prev_mem * 2 + 1))))
-		return ;
-	while (*(temp + i))
-	{
-		*(*str + i) = *(temp + i);
-		i++;
-	}
-	*prev_mem *= 2;
-	free(temp);
-}
-
-static int			fill_string(char **line, t_fd_list *cur_fd, int *to_alloc)
-{
-	int		len_line;
+	size_t	len_line;
+	char	cur_c;
 
 	len_line = ft_strlen(*line);
-	while (cur_fd->rsf < BUFF_SIZE && cur_fd->rsf < cur_fd->read_r)
+	while (*read_so_far < BUFF_SIZE)
 	{
-		if ((cur_fd->buff)[cur_fd->rsf] == '\n')
-		{
-			*(*line + len_line) = 0;
-			(cur_fd->buff)[cur_fd->rsf++] = 0;
+		cur_c = buff->buff[*read_so_far];
+		buff->buff[*read_so_far] = 0;
+		(*read_so_far)++;
+		if (!cur_c && (*read_so_far = BUFF_SIZE + 2))
+			return (3);
+		if (cur_c == '\n')
 			return (1);
-		}
 		if (len_line + 1 >= *to_alloc)
-			reallocate_mem(line, to_alloc);
-		if ((cur_fd->buff)[cur_fd->rsf])
-		{
-			*(*line + len_line) = (cur_fd->buff)[cur_fd->rsf];
-			len_line++;
-			*(*line + len_line) = 0;
-			(cur_fd->buff)[cur_fd->rsf] = 0;
-		}
-		(cur_fd->rsf)++;
+			ft_realloc((void **)line, *to_alloc + 1, (*to_alloc *= 2) + 1);
+		*(*line + len_line++) = cur_c;
+		*(*line + len_line) = 0;
 	}
-	cur_fd->eof = (cur_fd->rsf == cur_fd->read_r
-			&& cur_fd->read_r < BUFF_SIZE) ? 1 : 2;
-	return (cur_fd->eof);
+	return (2);
 }
 
-static int			read_file(char **line, t_fd_list *cur_fd,
-		int to_alloc, int is_new_buff)
+static int		read_file(t_buff *buff, char **line, size_t to_alloc, size_t *read_so_far)
 {
-	int			fill_status;
+	int	status;
+	int	read_r;
 
-	**line = 0;
-	fill_status = 0;
-	while (cur_fd && (fill_status == 0 || fill_status == 2))
+	status = 0;
+	while (status == 0 || status == 2)
 	{
-		if (fill_status == 2 || cur_fd->rsf == cur_fd->read_r)
+		if (status == 2 || *read_so_far >= BUFF_SIZE)
 		{
-			is_new_buff = 0;
-			cur_fd->rsf = 0;
-			if (0 >= ((cur_fd->read_r =
-							read(cur_fd->fd, cur_fd->buff, BUFF_SIZE)))
+			*read_so_far = 0;
+			buff->buff = (char *)ft_memset(buff->buff, 0, BUFF_SIZE);
+			if (0 >= ((read_r = read(buff->fd, buff->buff, BUFF_SIZE)))
 					&& !(**line))
-				return (cur_fd->read_r);
-			else if (!cur_fd->read_r)
+				return (read_r);
+			else if (!read_r)
 				return (1);
 		}
-		fill_status = fill_string(line, cur_fd, &to_alloc);
+		status = write_to_line(buff, line, &to_alloc, read_so_far);
 	}
-	return (fill_status);
+	if (status == 3)
+		return ((**line) ? 1 : 0);
+	return (status);
 }
 
-int					get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
-	int			to_alloc;
-	int			is_new_buff;
-	int			to_return;
-	t_fd_list	*cur_fd;
+	t_buff	*buff;
+	size_t	to_alloc;
+	size_t	read_so_far;
 
-	cur_fd = get_buff(fd, &is_new_buff);
+	buff = get_buff(fd);
 	to_alloc = BUFF_SIZE;
-	if (!line || !(*line = (char *)malloc(sizeof(char) * to_alloc + 1))
-			|| !cur_fd)
+	if (!line || !(*line = ft_strnew(to_alloc + 1)) || !buff)
 		return (-1);
-	if (cur_fd->eof == 1)
+	read_so_far = 0;
+	while (!buff->buff[read_so_far] && read_so_far < BUFF_SIZE)
+		read_so_far++;
+	if (read_so_far == BUFF_SIZE + 2)
 		return (0);
-	to_return = read_file(line, cur_fd, to_alloc, is_new_buff);
-	return (to_return);
+	return (read_file(buff, line, to_alloc, &read_so_far));	
 }
