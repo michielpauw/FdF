@@ -124,6 +124,6 @@ t_3v				*ft_zero_3v_p(void);
 t_3v				ft_init_3v(double a, double b, double c);
 t_3v				*ft_init_3v_p(double a, double b, double c);
 char				*ft_brace_content(char *input, char o, char c);
-void				ft_realloc(void *s, size_t old_size, size_t new_size);
+void				ft_realloc(void **s, size_t old_size, size_t new_size);
 
 #endif
