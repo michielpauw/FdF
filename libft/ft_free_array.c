@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 07:56:21 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/11 11:30:02 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/04 16:55:11 by mpauw             #+#    #+#             */
+/*   Updated: 2018/01/04 17:01:11 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+void	ft_free_array(void **to_free)
 {
-	t_list	*list;
+	int	i;
 
-	if (!(list = malloc(sizeof(t_list))))
-		return (NULL);
-	list->next = NULL;
-	if (!content)
-	{
-		list->content = NULL;
-		list->content_size = 0;
-	}
-	else
-	{
-		if (!(list->content = (void *)malloc(content_size)))
-			return (NULL);
-		list->content = ft_memmove(list->content, content, content_size);
-		list->content_size = content_size;
-	}
-	return (list);
+	i = 0;
+	while (*(to_free + i))
+		free(*(to_free + i++));
+	free(to_free);
 }

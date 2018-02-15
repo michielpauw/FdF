@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_3v_subtract.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 07:56:21 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/11 11:30:02 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 11:11:25 by mpauw             #+#    #+#             */
+/*   Updated: 2018/01/25 14:28:55 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_3v	*ft_3v_subtract(t_3v *v1, t_3v *v2)
 {
-	t_list	*list;
+	t_3v	*v_sub;
+	int		i;
 
-	if (!(list = malloc(sizeof(t_list))))
+	if (!v1 || !v2)
 		return (NULL);
-	list->next = NULL;
-	if (!content)
+	if (!(v_sub = (t_3v *)malloc(sizeof(t_3v))))
+		return (NULL);
+	i = 0;
+	while (i < 3)
 	{
-		list->content = NULL;
-		list->content_size = 0;
+		(v_sub->v)[i] = (v1->v)[i] - (v2->v)[i];
+		i++;
 	}
-	else
-	{
-		if (!(list->content = (void *)malloc(content_size)))
-			return (NULL);
-		list->content = ft_memmove(list->content, content, content_size);
-		list->content_size = content_size;
-	}
-	return (list);
+	return (v_sub);
 }

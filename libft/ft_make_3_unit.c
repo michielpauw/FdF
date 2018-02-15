@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_make_3_unit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 07:56:21 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/11 11:30:02 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 11:17:13 by mpauw             #+#    #+#             */
+/*   Updated: 2018/01/23 11:19:29 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+void	ft_make_3_unit(t_3v *v)
 {
-	t_list	*list;
+	int		i;
+	double	size;
 
-	if (!(list = malloc(sizeof(t_list))))
-		return (NULL);
-	list->next = NULL;
-	if (!content)
+	if (!v)
+		return ;
+	i = 0;
+	size = ft_get_3v_size(*v);
+	if (size == 0)
+		return ;
+	while (i < 3)
 	{
-		list->content = NULL;
-		list->content_size = 0;
+		(v->v)[i] /= size;
+		i++;
 	}
-	else
-	{
-		if (!(list->content = (void *)malloc(content_size)))
-			return (NULL);
-		list->content = ft_memmove(list->content, content, content_size);
-		list->content_size = content_size;
-	}
-	return (list);
 }

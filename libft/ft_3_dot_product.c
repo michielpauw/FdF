@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_3_dot_product.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 07:56:21 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/11 11:30:02 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 10:24:19 by mpauw             #+#    #+#             */
+/*   Updated: 2018/01/23 10:31:39 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+double	ft_3_dot_product(t_3v *v1, t_3v *v2)
 {
-	t_list	*list;
+	double	dot_product;
+	int		i;
 
-	if (!(list = malloc(sizeof(t_list))))
-		return (NULL);
-	list->next = NULL;
-	if (!content)
+	if (!v1 || !v2)
+		return (0);
+	dot_product = 0;
+	i = 0;
+	while (i < 3)
 	{
-		list->content = NULL;
-		list->content_size = 0;
+		dot_product += (v1->v)[i] * (v2->v)[i];
+		i++;
 	}
-	else
-	{
-		if (!(list->content = (void *)malloc(content_size)))
-			return (NULL);
-		list->content = ft_memmove(list->content, content, content_size);
-		list->content_size = content_size;
-	}
-	return (list);
+	return (dot_product);
 }

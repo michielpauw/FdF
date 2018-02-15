@@ -6,165 +6,112 @@
 #    By: mpauw <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:06:44 by mpauw             #+#    #+#              #
-#    Updated: 2017/12/01 15:03:44 by mpauw            ###   ########.fr        #
+#    Updated: 2018/01/29 17:21:52 by mpauw            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CPATH = ./
-SRC = $(CPATH)ft_atoi.c\
-	  $(CPATH)ft_bzero.c\
-	  $(CPATH)ft_isalnum.c\
-	  $(CPATH)ft_isalpha.c\
-	  $(CPATH)ft_isascii.c\
-	  $(CPATH)ft_isdigit.c\
-	  $(CPATH)ft_isprint.c\
-	  $(CPATH)ft_itoa.c\
-	  $(CPATH)ft_memalloc.c\
-	  $(CPATH)ft_memccpy.c\
-	  $(CPATH)ft_memchr.c\
-	  $(CPATH)ft_memcmp.c\
-	  $(CPATH)ft_memcpy.c\
-	  $(CPATH)ft_memdel.c\
-	  $(CPATH)ft_memmove.c\
-	  $(CPATH)ft_memset.c\
-	  $(CPATH)ft_putchar.c\
-	  $(CPATH)ft_putchar_fd.c\
-	  $(CPATH)ft_putendl.c\
-	  $(CPATH)ft_putendl_fd.c\
-	  $(CPATH)ft_putnbr.c\
-	  $(CPATH)ft_putnbr_fd.c\
-	  $(CPATH)ft_putstr.c\
-	  $(CPATH)ft_putstr_fd.c\
-	  $(CPATH)ft_strcat.c\
-	  $(CPATH)ft_strchr.c\
-	  $(CPATH)ft_strclr.c\
-	  $(CPATH)ft_strcmp.c\
-	  $(CPATH)ft_strcpy.c\
-	  $(CPATH)ft_strdel.c\
-	  $(CPATH)ft_strdup.c\
-	  $(CPATH)ft_strequ.c\
-	  $(CPATH)ft_striter.c\
-	  $(CPATH)ft_striteri.c\
-	  $(CPATH)ft_strjoin.c\
-	  $(CPATH)ft_strlcat.c\
-	  $(CPATH)ft_strlen.c\
-	  $(CPATH)ft_strmap.c\
-	  $(CPATH)ft_strmapi.c\
-	  $(CPATH)ft_strncat.c\
-	  $(CPATH)ft_strncmp.c\
-	  $(CPATH)ft_strncpy.c\
-	  $(CPATH)ft_strnequ.c\
-	  $(CPATH)ft_strnew.c\
-	  $(CPATH)ft_strnstr.c\
-	  $(CPATH)ft_strrchr.c\
-	  $(CPATH)ft_strsplit.c\
-	  $(CPATH)ft_strstr.c\
-	  $(CPATH)ft_strsub.c\
-	  $(CPATH)ft_strtrim.c\
-	  $(CPATH)ft_tolower.c\
-	  $(CPATH)ft_toupper.c\
-	  $(CPATH)ft_lstnew.c\
-	  $(CPATH)ft_lstdelone.c\
-	  $(CPATH)ft_lstdel.c\
-	  $(CPATH)ft_lstadd.c\
-	  $(CPATH)ft_lstiter.c\
-	  $(CPATH)ft_lstmap.c\
-	  $(CPATH)ft_numlen.c\
-	  $(CPATH)ft_lstaddnewr.c\
-	  $(CPATH)ft_lstaddnewl.c\
-	  $(CPATH)ft_lstaddright.c\
-	  $(CPATH)ft_power.c\
-	  $(CPATH)ft_factorial.c\
-	  $(CPATH)ft_sqrt.c\
-	  $(CPATH)ft_next_prime.c\
-	  $(CPATH)ft_factorization.c\
-	  $(CPATH)ft_isprime.c\
-	  $(CPATH)ft_convert_base.c\
-	  $(CPATH)ft_sqrt_fl.c\
-	  $(CPATH)ft_sqrt_cl.c\
-	  $(CPATH)get_next_line.c
-POINTO = ft_atoi.o\
-		 ft_bzero.o\
-		 ft_isalnum.o\
-		 ft_isalpha.o\
-		 ft_isascii.o\
-		 ft_isdigit.o\
-		 ft_isprint.o\
-		 ft_itoa.o\
-		 ft_memalloc.o\
-		 ft_memccpy.o\
-		 ft_memchr.o\
-		 ft_memcmp.o\
-		 ft_memcpy.o\
-		 ft_memdel.o\
-		 ft_memmove.o\
-		 ft_memset.o\
-		 ft_putchar.o\
-		 ft_putchar_fd.o\
-		 ft_putendl.o\
-		 ft_putendl_fd.o\
-		 ft_putnbr.o\
-		 ft_putnbr_fd.o\
-		 ft_putstr.o\
-		 ft_putstr_fd.o\
-		 ft_strcat.o\
-		 ft_strchr.o\
-		 ft_strclr.o\
-		 ft_strcmp.o\
-		 ft_strcpy.o\
-		 ft_strdel.o\
-		 ft_strdup.o\
-		 ft_strequ.o\
-		 ft_striter.o\
-		 ft_striteri.o\
-		 ft_strjoin.o\
-		 ft_strlcat.o\
-		 ft_strlen.o\
-		 ft_strmap.o\
-		 ft_strmapi.o\
-		 ft_strncat.o\
-		 ft_strncmp.o\
-		 ft_strncpy.o\
-		 ft_strnequ.o\
-		 ft_strnew.o\
-		 ft_strnstr.o\
-		 ft_strrchr.o\
-		 ft_strsplit.o\
-		 ft_strstr.o\
-		 ft_strsub.o\
-		 ft_strtrim.o\
-		 ft_tolower.o\
-		 ft_toupper.o\
-		 ft_lstnew.o\
-		 ft_lstdelone.o\
-		 ft_lstdel.o\
-		 ft_lstadd.o\
-		 ft_lstiter.o\
-		 ft_lstmap.o\
-		 ft_numlen.o\
-		 ft_lstaddnewr.o\
-		 ft_lstaddnewl.o\
-		 ft_lstaddright.o\
-		 ft_power.o\
-		 ft_factorial.o\
-		 ft_sqrt.o\
-		 ft_next_prime.o\
-		 ft_factorization.o\
-		 ft_isprime.o\
-		 ft_convert_base.o\
-		 ft_sqrt_fl.o\
-		 ft_sqrt_cl.o\
-		 get_next_line.o
+SRC = ft_atoi.c\
+	  ft_bzero.c\
+	  ft_isalnum.c\
+	  ft_isalpha.c\
+	  ft_isascii.c\
+	  ft_isdigit.c\
+	  ft_isprint.c\
+	  ft_itoa.c\
+	  ft_memalloc.c\
+	  ft_realloc.c\
+	  ft_memccpy.c\
+	  ft_memchr.c\
+	  ft_memcmp.c\
+	  ft_memcpy.c\
+	  ft_memdel.c\
+	  ft_memmove.c\
+	  ft_memset.c\
+	  ft_putchar.c\
+	  ft_putchar_fd.c\
+	  ft_putendl.c\
+	  ft_putendl_fd.c\
+	  ft_putnbr.c\
+	  ft_putnbr_fd.c\
+	  ft_putstr.c\
+	  ft_putstr_fd.c\
+	  ft_strcat.c\
+	  ft_strchr.c\
+	  ft_strclr.c\
+	  ft_strcmp.c\
+	  ft_strcpy.c\
+	  ft_strdel.c\
+	  ft_strdup.c\
+	  ft_strequ.c\
+	  ft_striter.c\
+	  ft_striteri.c\
+	  ft_strjoin.c\
+	  ft_strlcat.c\
+	  ft_strlen.c\
+	  ft_strmap.c\
+	  ft_strmapi.c\
+	  ft_strncat.c\
+	  ft_strncmp.c\
+	  ft_strncpy.c\
+	  ft_strnequ.c\
+	  ft_strnew.c\
+	  ft_strnstr.c\
+	  ft_strrchr.c\
+	  ft_strsplit.c\
+	  ft_strstr.c\
+	  ft_strsub.c\
+	  ft_strtrim.c\
+	  ft_tolower.c\
+	  ft_toupper.c\
+	  ft_lstnew.c\
+	  ft_lstdelone.c\
+	  ft_lstdel.c\
+	  ft_lstadd.c\
+	  ft_lstiter.c\
+	  ft_lstmap.c\
+	  ft_numlen.c\
+	  ft_brace_content.c\
+	  ft_lstaddnewr.c\
+	  ft_lstaddnewl.c\
+	  ft_lstaddright.c\
+	  ft_power.c\
+	  ft_factorial.c\
+	  ft_sqrt.c\
+	  ft_next_prime.c\
+	  ft_factorization.c\
+	  ft_isprime.c\
+	  ft_convert_base.c\
+	  ft_sqrt_fl.c\
+	  ft_sqrt_cl.c\
+	  get_next_line.c\
+	  ft_atod.c\
+	  ft_free_array.c\
+	  ft_3_dot_product.c\
+	  ft_get_3v_size.c\
+	  ft_3v_add.c\
+	  ft_3v_subtract.c\
+	  ft_get_3_unit.c\
+	  ft_make_3_unit.c\
+	  ft_cross_product.c\
+	  ft_3v_scalar.c\
+	  ft_rotate_v.c\
+	  ft_init_3v.c\
+	  ft_init_3v_p.c\
+	  ft_zero_3v.c\
+	  ft_zero_3v_p.c
+POINTO = $(SRC:%.c=%.o)
 NAME = libft.a
 FLAGS = -Wall -Wextra -Werror
 INCLUDE_HEADER = -I.
 
 all: $(NAME)
 
-$(NAME):
-	-@gcc $(FLAGS) $(INCLUDE_HEADER) -c $(SRC)
+$(NAME): $(POINTO)
 	-@ar rc $(NAME) $(POINTO) && ranlib $(NAME)
 	-@echo "Libft ready"
+
+%.o: %.c $(INCLUDES)
+	-@gcc -ggdb $(FLAGS) $(INCLUDE_HEADER) $(FLAGS) -c $(SRC)
 
 clean:
 	-@/bin/rm -f $(POINTO)

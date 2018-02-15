@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_rotate_v.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 07:56:21 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/11 11:30:02 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 11:26:35 by mpauw             #+#    #+#             */
+/*   Updated: 2018/01/23 11:29:52 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+void	ft_rotate_v(t_3v *v, int axis, double angle, int rad)
 {
-	t_list	*list;
+	double	e[3];
 
-	if (!(list = malloc(sizeof(t_list))))
-		return (NULL);
-	list->next = NULL;
-	if (!content)
-	{
-		list->content = NULL;
-		list->content_size = 0;
-	}
-	else
-	{
-		if (!(list->content = (void *)malloc(content_size)))
-			return (NULL);
-		list->content = ft_memmove(list->content, content, content_size);
-		list->content_size = content_size;
-	}
-	return (list);
+	if (!v)
+		return ;
+	if (!rad)
+		angle = angle * RAD;
+	e[0] = (v->v)[0];
+	e[1] = (v->v)[1];
+	e[2] = (v->v)[2];
+	(v->v)[axis] = e[axis];
+	(v->v)[(axis + 1) % 3] = cos(angle) * e[(axis + 1) % 3]
+		- sin(angle) * e[(axis + 2) % 3];
+	(v->v)[(axis + 2) % 3] = cos(angle) * e[(axis + 2) % 3]
+		+ sin(angle) * e[(axis + 1) % 3];
 }

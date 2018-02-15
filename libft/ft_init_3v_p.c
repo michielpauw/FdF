@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_init_3v_p.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 07:56:21 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/11 11:30:02 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 18:04:50 by mpauw             #+#    #+#             */
+/*   Updated: 2018/01/30 17:31:21 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_3v	*ft_init_3v_p(double a, double b, double c)
 {
-	t_list	*list;
+	t_3v	*v;
 
-	if (!(list = malloc(sizeof(t_list))))
+	if (!(v = (t_3v *)malloc(sizeof(t_3v))))
 		return (NULL);
-	list->next = NULL;
-	if (!content)
-	{
-		list->content = NULL;
-		list->content_size = 0;
-	}
-	else
-	{
-		if (!(list->content = (void *)malloc(content_size)))
-			return (NULL);
-		list->content = ft_memmove(list->content, content, content_size);
-		list->content_size = content_size;
-	}
-	return (list);
+	(v->v)[0] = a;
+	(v->v)[1] = b;
+	(v->v)[2] = c;
+	return (v);
 }
