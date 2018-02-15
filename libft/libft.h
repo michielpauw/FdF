@@ -6,7 +6,7 @@
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:04:39 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/29 17:21:04 by mpauw            ###   ########.fr       */
+/*   Updated: 2018/02/02 11:30:42 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,17 @@ size_t				ft_sqrt_cl(size_t nb);
 int					get_next_line(const int fd, char **line);
 double				ft_atod(const char *s);
 void				ft_free_array(void **to_free);
-double				ft_3_dot_product(t_3v *v1, t_3v *v2);
+double				ft_3v_dot_product(t_3v v1, t_3v v2);
 double				ft_get_3v_size(t_3v v);
-t_3v				*ft_3v_add(t_3v *v1, t_3v *v2);
-t_3v				*ft_3v_subtract(t_3v *v1, t_3v *v2);
-t_3v				*ft_get_3_unit(int dir);
-void				ft_make_3_unit(t_3v *v);
-t_3v				*ft_cross_product(t_3v v1, t_3v v2);
+t_3v				ft_3v_add(t_3v v1, t_3v v2);
+t_3v				ft_3v_subtract(t_3v v1, t_3v v2);
+t_3v				ft_get_3v_unit(int dir);
+void				ft_make_3v_unit(t_3v v);
+t_3v				ft_cross_product(t_3v v1, t_3v v2);
 void				ft_3v_scalar(t_3v *v, double s);
-void				ft_rotate_v(t_3v *v, int axis, double angle, int rad);
+void				ft_rotate_3v(t_3v *v, int axis, double angle, int rad);
 t_3v				ft_zero_3v(void);
-t_3v				*ft_zero_3v_p(void);
 t_3v				ft_init_3v(double a, double b, double c);
-t_3v				*ft_init_3v_p(double a, double b, double c);
 char				*ft_brace_content(char *input, char o, char c);
 void				ft_realloc(void **s, size_t old_size, size_t new_size);
 

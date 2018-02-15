@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rotate_v.c                                      :+:      :+:    :+:   */
+/*   ft_make_3v_unit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/23 11:26:35 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/23 11:29:52 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 11:17:13 by mpauw             #+#    #+#             */
+/*   Updated: 2018/02/02 11:30:54 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_rotate_v(t_3v *v, int axis, double angle, int rad)
+void	ft_make_3_unit(t_3v v)
 {
-	double	e[3];
+	int		i;
+	double	size;
 
-	if (!v)
+	i = 0;
+	size = ft_get_3v_size(v);
+	if (size == 0)
 		return ;
-	if (!rad)
-		angle = angle * RAD;
-	e[0] = (v->v)[0];
-	e[1] = (v->v)[1];
-	e[2] = (v->v)[2];
-	(v->v)[axis] = e[axis];
-	(v->v)[(axis + 1) % 3] = cos(angle) * e[(axis + 1) % 3]
-		- sin(angle) * e[(axis + 2) % 3];
-	(v->v)[(axis + 2) % 3] = cos(angle) * e[(axis + 2) % 3]
-		+ sin(angle) * e[(axis + 1) % 3];
+	while (i < 3)
+	{
+		(v.v)[i] /= size;
+		i++;
+	}
 }

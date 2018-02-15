@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_3v_p.c                                     :+:      :+:    :+:   */
+/*   ft_3v_dot_product.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/23 18:04:50 by mpauw             #+#    #+#             */
-/*   Updated: 2018/01/30 17:31:21 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 10:24:19 by mpauw             #+#    #+#             */
+/*   Updated: 2018/02/02 11:24:13 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_3v	*ft_init_3v_p(double a, double b, double c)
+double	ft_3v_dot_product(t_3v v1, t_3v v2)
 {
-	t_3v	*v;
+	double	dot_product;
+	int		i;
 
-	if (!(v = (t_3v *)malloc(sizeof(t_3v))))
-		return (NULL);
-	(v->v)[0] = a;
-	(v->v)[1] = b;
-	(v->v)[2] = c;
-	return (v);
+	dot_product = 0;
+	i = 0;
+	while (i < 3)
+	{
+		dot_product += (v1.v)[i] * (v2.v)[i];
+		i++;
+	}
+	return (dot_product);
 }
