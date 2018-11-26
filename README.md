@@ -6,5 +6,7 @@ Tilt forward: W
 Tilt backward: S   
 Tilt left: A   
 Tilt right: D   
+Rotate left: arrow left  
+Rotate right: arrow right  
 Zoom in: arrow up   
 Zoom out: arrow down    
