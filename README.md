@@ -10,3 +10,7 @@ Rotate left: arrow left
 Rotate right: arrow right  
 Zoom in: arrow up   
 Zoom out: arrow down    
+Change color 1: [    
+Change color 2: ]  
+Different Z value changes color less: ;  
+Different Z value changes color more: '  
