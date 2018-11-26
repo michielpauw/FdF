@@ -68,10 +68,11 @@ static t_point	*get_point_list(int fd, int *width, int *height)
 {
 	char	*line;
 	char	**values;
+	int		al;
 	t_point	*lst;
 
 	lst = NULL;
-	while (get_next_line(fd, &line) > 0)
+	while ((al = get_next_line(fd, &line)) > 0)
 	{
 		*width = 0;
 		values = ft_strsplit((const char *)line, ' ');
@@ -84,7 +85,10 @@ static t_point	*get_point_list(int fd, int *width, int *height)
 		(*height)++;
 		free(line);
 		double_free(values);
+		al = 1;
 	}
+	if (al < 0)
+		error(errno);
 	free(line);
 	return (lst);
 }

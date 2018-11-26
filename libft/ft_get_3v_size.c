@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_get_3v_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 08:40:27 by mpauw             #+#    #+#             */
-/*   Updated: 2017/11/27 16:44:11 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 10:32:14 by mpauw             #+#    #+#             */
+/*   Updated: 2018/01/23 11:08:00 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# define BUFF_SIZE 32 
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
-
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_buff
+double	ft_get_3v_size(t_3v v)
 {
-	int				fd;
-	char			*buff;
-}					t_buff;
+	double	size;
+	int		i;
 
-#endif
+	size = 0;
+	i = 0;
+	while (i < 3)
+	{
+		size += (v.v)[i] * (v.v)[i];
+		i++;
+	}
+	size = sqrt(size);
+	return (size);
+}

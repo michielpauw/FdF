@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_3v_subtract.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpauw <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 08:40:27 by mpauw             #+#    #+#             */
-/*   Updated: 2017/11/27 16:44:11 by mpauw            ###   ########.fr       */
+/*   Created: 2018/01/23 11:11:25 by mpauw             #+#    #+#             */
+/*   Updated: 2018/02/02 11:21:46 by mpauw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# define BUFF_SIZE 32 
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
-
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_buff
+t_3v	ft_3v_subtract(t_3v v1, t_3v v2)
 {
-	int				fd;
-	char			*buff;
-}					t_buff;
+	t_3v	v_sub;
+	int		i;
 
-#endif
+	i = 0;
+	while (i < 3)
+	{
+		(v_sub.v)[i] = (v1.v)[i] - (v2.v)[i];
+		i++;
+	}
+	return (v_sub);
+}
